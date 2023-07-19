@@ -12,35 +12,25 @@ public class Manager extends Employee{
     @OneToMany(mappedBy = "manager")
     private List<Report> reports;
 
-    public Manager(Long employeeId, String firstName, String lastName, String position,
-                   List<Employee> employees, List<Task> tasks
+    public Manager() {
+    }
 
-                  ,List<Report> reports
-    ) {
-        super(employeeId, firstName, lastName, position, tasks);
+    public Manager(String firstName, String lastName, String position, List<Task> tasks, List<Employee> employees, List<Report> reports, Department department, Manager manager) {
+        super(firstName, lastName, position, tasks,manager,department);
         this.employees = employees;
         this.reports = reports;
     }
 
 
-    public List<Report> getReports() {
-        return reports;
-    }
 
     public void addReport(Report report){
-        List<Report> reports = getReports();
         reports.add(report);
     }
 
-    public void setReports(List<Report> reports) {
-        this.reports = reports;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+    public void addEmployee (Employee employee){
+        employees.add(employee);
     }
 }
+
+
+

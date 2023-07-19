@@ -1,4 +1,4 @@
-package com.gilad.AssignTasksApp;
+package com.gilad.AssignTasksApp.resources;
 
 import com.gilad.AssignTasksApp.model.Manager;
 import com.gilad.AssignTasksApp.model.Report;

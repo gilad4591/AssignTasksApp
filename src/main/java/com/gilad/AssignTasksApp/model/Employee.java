@@ -10,24 +10,28 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employeeId;
     private String firstName;
     private String lastName;
-    private String position;
     @ManyToOne(fetch = FetchType.LAZY)
     private Manager manager;
     @OneToMany(mappedBy = "employee")
     private List<Task> tasks;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Department department;
 
-
-    public Employee(Long employeeId, String firstName, String lastName, String position, List<Task> tasks) {
-        this.employeeId = employeeId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.position = position;
-        this.tasks = tasks;
+    public Employee() {
     }
 
+    public Employee(String firstName, String lastName, String position, List<Task> tasks, Manager manager, Department department) {
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.tasks = tasks;
+        this.manager = manager;
+        this.department = department;
+    }
 
 
     public Long getEmployeeId() {
@@ -54,19 +58,27 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
     public List<Task> getTasks() {
         return tasks;
     }
 
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

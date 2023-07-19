@@ -7,13 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 @Repository
-
-public interface EmployeeRepo extends JpaRepository<Employee,Long> {
-
-
-    void deleteEmployeeByEmployeeId(Long id);
-
+public interface EmployeeRepo extends JpaRepository<Employee, Long> {
+    Optional<List<Employee>> findEmployeeByManagerEmployeeId(Long id);
     Optional<Employee> findEmployeeByEmployeeId(Long id);
-
-    Optional<Employee> findEmployeeByManagerEmployeeId(Long id);
+    void deleteEmployeeByEmployeeId(Long id);
+    List<Employee> findEmployeesByFirstName(String firstName);
+    Optional<List<Employee>> findEmployeesByDepartmentId(Long departmentId);
 }

@@ -1,6 +1,7 @@
 package com.gilad.AssignTasksApp.exception;
 
 public class ReportNotFoundException extends RuntimeException {
-    public ReportNotFoundException(String s) {
+    public ReportNotFoundException(String message) {
+        super(message);
     }
 }

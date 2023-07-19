@@ -5,10 +5,9 @@ import java.util.Date;
 
 @Entity
 public class Report {
-//    @GeneratedValue
 
-//    @Column(nullable = false, updatable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reportId;
     private String text;
     private Date date;
@@ -17,8 +16,10 @@ public class Report {
     private Manager manager;
 
 
-    public Report(Long reportId, String text, Date date, Long reporterId) {
-        this.reportId = reportId;
+    public Report() {
+    }
+
+    public Report(String text, Date date, Long reporterId) {
         this.text = text;
         this.date = date;
         this.reporterId = reporterId;

@@ -4,6 +4,7 @@ import com.gilad.AssignTasksApp.exception.ReportNotFoundException;
 import com.gilad.AssignTasksApp.model.Report;
 import com.gilad.AssignTasksApp.repo.ReportRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,14 +18,33 @@ public class ReportService {
     }
 
     public List<Report> findReportsByManagerEmployeeId(Long employeeId){
-        return (List<Report>) reportRepo.findReportByManagerEmployeeId(employeeId).orElseThrow(()->new ReportNotFoundException("report not found for manager" + employeeId));
+        return reportRepo.findReportByManagerEmployeeId(employeeId).orElseThrow(()->new ReportNotFoundException("report not found for manager" + employeeId));
     }
     public List<Report> findReportsByReporterId(Long reporterId){
-        return (List<Report>) reportRepo.findReportsByReporterId(reporterId).orElseThrow(()->new ReportNotFoundException("report not found for manager" + reporterId));
+        return reportRepo.findReportsByReporterId(reporterId).orElseThrow(()->new ReportNotFoundException("report not found for manager" + reporterId));
     }
 
     public Report addReport(Report report){
         reportRepo.save(report);
         return report;
+    }
+    public void deleteReport(Long reportId) {
+        try {
+            reportRepo.deleteById(reportId);
+        } catch (EmptyResultDataAccessException ex) {
+            throw new ReportNotFoundException("Report not found for ID: " + reportId);
+        }
+    }
+
+    public Report updateReport(Report report) {
+        if (report.getReportId() == null) {
+            throw new IllegalArgumentException("Report ID cannot be null for update operation.");
+        }
+
+        if (!reportRepo.existsById(report.getReportId())) {
+            throw new ReportNotFoundException("Report not found for ID: " + report.getReportId());
+        }
+
+        return reportRepo.save(report);
     }
 }

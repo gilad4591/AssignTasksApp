@@ -5,15 +5,18 @@ import java.util.Date;
 
 @Entity
 public class Task {
-//    @GeneratedValue
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
     private String text;
     private Date assignDate;
     private Date dueDate;
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee employee;
+
+    public Task() {
+    }
 
     public Task(Long taskId, String text, Date assignDate, Date dueDate) {
         this.taskId = taskId;
