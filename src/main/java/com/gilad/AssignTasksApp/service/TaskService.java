@@ -1,5 +1,6 @@
 package com.gilad.AssignTasksApp.service;
 
+import com.gilad.AssignTasksApp.Common.TaskStatus;
 import com.gilad.AssignTasksApp.exception.TaskNotFoundException;
 import com.gilad.AssignTasksApp.exception.UserNotFoundException;
 import com.gilad.AssignTasksApp.model.Employee;
@@ -40,5 +41,14 @@ public class TaskService {
 
     public List<Task> findTasksByDueDate(Date dueDate) {
         return taskRepo.findTasksByDueDate(dueDate);
+    }
+
+    public Task updateTaskStatus(Long taskId, TaskStatus newStatus) {
+        Task task = taskRepo.findTaskByTaskId(taskId)
+                .orElseThrow(() -> new TaskNotFoundException("Task not found for ID: " + taskId));
+
+        task.updateStatus(newStatus);
+
+        return taskRepo.save(task);
     }
 }

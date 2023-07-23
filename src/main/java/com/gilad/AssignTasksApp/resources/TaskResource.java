@@ -1,5 +1,6 @@
 package com.gilad.AssignTasksApp.resources;
 
+import com.gilad.AssignTasksApp.Common.TaskStatus;
 import com.gilad.AssignTasksApp.model.Employee;
 import com.gilad.AssignTasksApp.model.Task;
 import com.gilad.AssignTasksApp.service.EmployeeService;
@@ -40,7 +41,10 @@ public class TaskResource {
         return new ResponseEntity<>(assignedEmployee,HttpStatus.CREATED);
     }
 
-//    @PostMapping("/assign/{taskId}/{employeeId}")
-//    public ResponseEntity<>
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Task> updateTaskStatus(@PathVariable("id") Long taskId, @RequestParam("status") TaskStatus newStatus) {
+        Task updatedTask = taskService.updateTaskStatus(taskId, newStatus);
+        return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+    }
 
 }
