@@ -13,17 +13,19 @@ public class Task {
     private Date assignDate;
     private Date dueDate;
     @ManyToOne(fetch = FetchType.LAZY)
+    private Manager manager; // Many tasks can be assigned by one manager
+    @ManyToOne(fetch = FetchType.LAZY)
     private Employee employee;
 
     public Task() {
     }
 
-    public Task(Long taskId, String text, Date assignDate, Date dueDate) {
+    public Task(Long taskId, String text, Date assignDate, Date dueDate, Manager manager) {
         this.taskId = taskId;
         this.text = text;
         this.assignDate = assignDate;
         this.dueDate = dueDate;
-
+        this.manager = manager;
     }
 
     public Long getTaskId() {
@@ -65,5 +67,13 @@ public class Task {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 }

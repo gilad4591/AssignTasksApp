@@ -15,8 +15,8 @@ public class Manager extends Employee{
     public Manager() {
     }
 
-    public Manager(String firstName, String lastName, String position, List<Task> tasks, List<Employee> employees, List<Report> reports, Department department, Manager manager) {
-        super(firstName, lastName, position, tasks,manager,department);
+    public Manager(String firstName, String lastName, List<Task> tasks, List<Employee> employees, List<Report> reports, Department department, Manager manager) {
+        super(firstName, lastName, tasks,manager,department);
         this.employees = employees;
         this.reports = reports;
     }

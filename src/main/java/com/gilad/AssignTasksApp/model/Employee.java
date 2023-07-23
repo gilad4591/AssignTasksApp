@@ -18,13 +18,15 @@ public class Employee {
     private Manager manager;
     @OneToMany(mappedBy = "employee")
     private List<Task> tasks;
+    @OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL)
+    private List<Report> reports;
     @ManyToOne(fetch = FetchType.LAZY)
     private Department department;
 
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String position, List<Task> tasks, Manager manager, Department department) {
+    public Employee(String firstName, String lastName, List<Task> tasks, Manager manager, Department department) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -80,5 +82,13 @@ public class Employee {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public List<Report> getReports() {
+        return reports;
+    }
+
+    public void setReports(List<Report> reports) {
+        this.reports = reports;
     }
 }

@@ -11,18 +11,18 @@ public class Report {
     private Long reportId;
     private String text;
     private Date date;
-    private Long reporterId;
     @ManyToOne(fetch = FetchType.LAZY)
     private Manager manager;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Employee reporter;
 
     public Report() {
     }
 
-    public Report(String text, Date date, Long reporterId) {
+    public Report(String text, Date date, Employee reporter) {
         this.text = text;
         this.date = date;
-        this.reporterId = reporterId;
+        this.reporter = reporter;
     }
 
     public Long getReportId() {
@@ -49,12 +49,12 @@ public class Report {
         this.date = date;
     }
 
-    public Long getReporterId() {
-        return reporterId;
+    public Employee getReporterId() {
+        return reporter;
     }
 
-    public void setReporterId(Long reporterId) {
-        this.reporterId = reporterId;
+    public void setReporterId(Employee reporterId) {
+        this.reporter = reporter;
     }
 
     public Manager getManager() {
